@@ -270,6 +270,8 @@
                                 }
                                 let pay = (item.orderOfficeView.TOTAL_PRICE / 100) * 10;
 
+                                const textType = groupNo === 1 ? "수거하기" : "배송하기";
+
                                 listElement +=
                                     "<div class='order-box' onclick='markerPositon(" + item.orderOfficeView.LON_X + ", " + item.orderOfficeView.LAT_Y + ")'>" +
                                     "<div class='timer-box'></div>" +
@@ -290,7 +292,7 @@
                                     "</div>" +
                                     "</div>" +
                                     "<div class='right'>" +
-                                    "<button onclick='addList(1," + item.orderOfficeView.NO + ", this)'>수거하기</button>" +
+                                    "<button onclick='addList(1," + item.orderOfficeView.NO + ", this)'>" + textType + "</button>" +
                                     "<input type='hidden' value='" + item.orderOfficeView.NO + "'/>" +
                                     "</div>" +
                                     "</div>" +

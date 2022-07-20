@@ -1,5 +1,13 @@
 package com.ez.launer.configuration;
 
+import java.util.Collections;
+
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.SessionCookieConfig;
+import javax.servlet.SessionTrackingMode;
+
+import org.springframework.boot.web.servlet.ServletContextInitializer;
 import com.ez.launer.controller.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -121,5 +129,18 @@ public class MvcConfiguration implements WebMvcConfigurer{
 		multipartResolver.setMaxUploadSizePerFile(10 * 1024 * 1024); // 파일당 업로드 크기 제한 (2MB)
 		return multipartResolver;
 	}
-	
+
+
+	//j-session 삭제
+	@Bean
+	public ServletContextInitializer clearJsession() {
+		return new ServletContextInitializer() {
+			@Override
+			public void onStartup(ServletContext servletContext) throws ServletException {
+				servletContext.setSessionTrackingModes(Collections.singleton(SessionTrackingMode.COOKIE));
+				SessionCookieConfig sessionCookieConfig=servletContext.getSessionCookieConfig();
+				sessionCookieConfig.setHttpOnly(true);
+			}
+		};
+	}
 }

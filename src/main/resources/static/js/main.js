@@ -1,4 +1,5 @@
 $(function () {
+    console.log("test");
     const $secPartOne = $(".web-page section.part-one");
     let $topHeaderHeight = $("#header-wrap").height();
 

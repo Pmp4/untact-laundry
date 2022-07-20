@@ -333,7 +333,7 @@ footer img:focus, footer a:focus {
 				<img src="<c:url value="/images/logo_4.svg"/>"></a>
 			<p>
 				관리자 아이디 비밀번호 분실시, 본사로 연락 바랍니다. <a href="#"
-					target="_blank">02-123-4567</a>
+					target="_blank">02-3000-3000</a>
 			</p>
 		</footer>
 	</div>
