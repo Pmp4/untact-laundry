@@ -12,15 +12,14 @@ public interface ConstUtil {
 
 	//String FILE_UPLOAD_TYPE = "deploy";	// 배포시
 
+//	String FILE_UPLOAD_TYPE = "deploy";	// 배포시
 
 	
 	//자료실 - 파일 저장 경로
-
+//	String TEST_FILE_PATH = "C:\\lecture\\workspace_list\\git_ws\\launer\\src\\main\\resources\\static\\upload\\";	//정인 집
+//	String TEST_FILE_PATH = "C:\\lecture\\workspace_list\\sung_ws\\launer\\src\\main\\resources\\static\\upload\\";
 //	String TEST_FILE_PATH = "/Library/IntelliJ Folder/project/src/main/resources/static/upload/";	//for Mac
-
-	String TEST_FILE_PATH = "C:\\Users\\EZEN\\git\\launer\\src\\main\\resources\\static\\upload\\";	//for Window
-	//String TEST_FILE_PATH = "/Library/IntelliJ Folder/project/src/main/resources/static/upload/";	//for Mac
-//	String TEST_FILE_PATH = "C:\\lecture\\workspace_list\\sung_ws\\launer\\src\\main\\resources\\static\\upload\\";	//for Window
+	String TEST_FILE_PATH = "C:\\lecture\\workspace_list\\git_ws\\launer\\src\\main\\resources\\static\\upload\\";	//for Window
 	String FILE_UPLOAD_PATH = "pd_upload";
 //	String FILE_UPLOAD_PATH_TEST = "C:\\lecture\\workspace_list\\spboot_ws\\springherb\\src\\main\\resources\\static\\pds_upload";
 //	String FILE_UPLOAD_PATH_TEST = TEST_FILE_PATH + FILE_UPLOAD_PATH;	//Mac
