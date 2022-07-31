@@ -172,8 +172,34 @@ public class BoardAPIController {
 
 
 
+    @DeleteMapping("/fileDelete/{fileNo}")
+    @ResponseBody
+    public Map<String, Object> fileDelete(@PathVariable int fileNo, HttpServletRequest request) {
+        logger.info("파일 삭제, fileNo={}", fileNo);
 
+        BoardFileVO boardFileVO = boardService.selectBoardFileByNo(fileNo);
+        logger.info("파일 정보 boardFileVO={}", boardFileVO);
 
+        int result = boardService.deleteFile(fileNo);
+        logger.info("DB 파일정보 삭제 result={}", result);
+
+        boolean resBool = result > 0;
+
+        //파일삭제
+        if(resBool) {
+            String uploadPath = fileUploadUtil.getUploadPath(request, ConstUtil.UPLOAD_FILE_FLAG);
+            File delFile = new File(uploadPath, boardFileVO.getFileName());
+            if(delFile.exists()) {
+                boolean fileBool = delFile.delete();
+                logger.info("파일 삭제 여부: {}", fileBool);
+            }
+        }
+
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("SUCCESS", resBool);
+
+        return resultMap;
+    }
 
 
 

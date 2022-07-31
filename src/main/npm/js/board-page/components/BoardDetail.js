@@ -49,14 +49,22 @@ const BoardDetail = ({detailNo, userInfo, contentList, deleteModalOut}) => {
                 '_blank'
             );
         }}>*/
-        <div key={item.no} className="file-down" onClick={() => {
-            window.open(
-                `http://localhost:9095/launer/board/file/download?fileName=${item.fileName}&no=${item.no}`
-            );
-        }}>
+        <div key={item.no} className={editMode ? "file-down" : "file-down mode"} onClick={editMode ? () => {} :
+            () => {
+                window.open(
+                    `http://localhost:9095/launer/board/file/download?fileName=${item.fileName}&no=${item.no}`
+                );
+            }
+        }>
             <h3>{item.originalFileName}</h3>
             <p>{Math.round((item.fileSize / 1024.0) * 10) / 10}kb &nbsp;<span><i
-                className="fa-solid fa-download"></i> {item.downCount}</span></p>
+                className="fa-solid fa-download"></i> {item.downCount}</span>
+            </p>
+            {editMode ?
+                <div className="file-del-btn" onClick={() => {deleteFile(item.no)}}>
+                    <i className="fa-solid fa-minus"></i>
+                </div>
+                : ""}
         </div>
 
 
@@ -147,6 +155,18 @@ const BoardDetail = ({detailNo, userInfo, contentList, deleteModalOut}) => {
         xhr.send(formData);
     })*/
 
+    const deleteFile = useCallback((fileNo) => {
+        console.log(fileNo);
+
+        BoardService.boardFileDelete(fileNo)
+            .then((response) => {
+                console.log(response.data.SUCCESS);
+                if(response.data.SUCCESS) {
+                    apiBoard();
+                }
+            })
+    });
+
 
     const dateReturn = useCallback((date) => {
         return `${date.getFullYear()}-${(date.getMonth() + 1) >= 10 ?
@@ -194,12 +214,14 @@ const BoardDetail = ({detailNo, userInfo, contentList, deleteModalOut}) => {
                 {editMode ? (<input onChange={fileChange} ref={e => refKey.current["file"] = e} className="upload-name"  type="file" placeholder="첨부파일" multiple/>) : ""}
             </div>
             {/*<input type="text" value={content} onChange={(e) => setContent(e.target.value)}/>*/}
-            <div className="content-wrap">
+            <div className="content-wrap" style={!editMode ? {} : {
+                marginBottom : "60px"
+            }}>
                 {editMode ? (<EditorComponent value={value} onChange={onChange}/>) :
                     (<div dangerouslySetInnerHTML={{__html: (data.content)}}></div>)
                 }
             </div>
-            {categoryNo.includes("A") || <BoardComment dateReturn={dateReturn} detailNo={detailNo} userInfo={userInfo} apiBoard={apiBoard}/>}
+            {categoryNo.includes("A") || !editMode ? <BoardComment dateReturn={dateReturn} detailNo={detailNo} userInfo={userInfo} apiBoard={apiBoard}/> : ""}
         </div>
     );
 };

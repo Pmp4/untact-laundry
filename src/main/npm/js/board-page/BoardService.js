@@ -9,6 +9,10 @@ const boardDeleteNo = (no) => {
     return httpCommon.delete(`/board/${no}`)
 }
 
+const boardFileDelete = (no) => {
+	return httpCommon.delete(`/fileDelete/${no}`);
+}
+
 /*const fileDownload = (data) => {
     return httpCommon.get("/board/file/download", data);
 }*/
@@ -16,6 +20,7 @@ const boardDeleteNo = (no) => {
 const boardUpdate = (fileChk, boardVo) => {
     return httpFileCommon.post(`/board/${fileChk}`, boardVo);
 }
+
 
 
 
@@ -58,5 +63,5 @@ const commentsDeleteByCommentsNo = (commentsNo) => {
 
 
 
-export default {boardNoView, boardDeleteNo, boardUpdate,
+export default {boardNoView, boardDeleteNo, boardFileDelete, boardUpdate,
 				commentsSelectByBoardNo, commentsInsert, commentsDeleteByCommentsNo};

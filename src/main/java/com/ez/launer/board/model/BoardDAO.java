@@ -30,4 +30,8 @@ public interface BoardDAO {
     int updateBoard(BoardVO boardVO);
 
     BoardCategoryVO selectBoardCategoryByNo(String categoryNo);
+
+    int deleteBoardFileByNo(int no);
+
+    BoardFileVO selectBoardFileByNo(int no);
 }

@@ -109,7 +109,10 @@ public class BoardServiceImpl implements BoardService{
             result = boardDAO.updateBoard(boardVo);
             logger.info("[1] 게시판 업데이트 result={}", result);
 
-            if(result > 0 && bool) {
+            //기존파일 삭제하는 로직
+            //기존파일 삭제하는 로직
+            //기존파일 삭제하는 로직
+            /*if(result > 0 && bool) {
                 int cnt = 0;
                 cnt = boardDAO.deleteBoardFile(no);
                 logger.info("[2] 기존파일 삭제 cnt={}", cnt);
@@ -119,6 +122,15 @@ public class BoardServiceImpl implements BoardService{
                     cnt = boardDAO.insertUploadFile(uploadFileVO);
                 }
                 logger.info("[3] 파일 dataInsert result={}", cnt);
+            }*/
+
+            //새롭게 짠 로직
+            //새롭게 짠 로직
+            //새롭게 짠 로직
+            int cnt = 0;
+            for (UploadFileVO uploadFileVO : uploadFileVOList) {
+                logger.info("파일 정보 : {}", uploadFileVO);
+                result = boardDAO.insertUploadFile(uploadFileVO);
             }
         } catch(RuntimeException e) {
             e.printStackTrace();
@@ -132,5 +144,15 @@ public class BoardServiceImpl implements BoardService{
     @Override
     public BoardCategoryVO selectBoardCategoryByNo(String categoryNo) {
         return boardDAO.selectBoardCategoryByNo(categoryNo);
+    }
+
+    @Override
+    public int deleteFile(int no) {
+        return boardDAO.deleteBoardFileByNo(no);
+    }
+
+    @Override
+    public BoardFileVO selectBoardFileByNo(int no) {
+        return boardDAO.selectBoardFileByNo(no);
     }
 }
